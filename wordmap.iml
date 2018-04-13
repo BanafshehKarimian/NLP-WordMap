@@ -11,5 +11,7 @@
     <orderEntry type="library" name="src (2)" level="project" />
     <orderEntry type="library" name="opencload" level="project" />
     <orderEntry type="library" name="opencloud-0.3" level="project" />
+    <orderEntry type="library" name="PersianStemmer-Java" level="project" />
+    <orderEntry type="library" name="named-regexp-0.2.3" level="project" />
   </component>
 </module>

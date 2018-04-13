@@ -30,10 +30,31 @@ public class filereader {
         output = input.replace("\u200C"," ").replace("\n"," \n ");
         output = removeSimbols(output);
         output = replaceArabic(output);
-        output = removeExtra(output);
-        output = removeVerbs(output);
-        output = output.replace("های ","").replace("هایی ","");
+        //output = removeExtra(output);
+        //output = removeVerbs(output);
+        //output = output.replace("های ","").replace("هایی ","");
+
+        output = output.replace("ܫܲܫ"," ").replace("ہ", " ").replace("ے"," ").replace("ں","ر").replace("ی","ی");
+        output = replaceAlphabet(output);
         return output;//removeVerbs(output);
+    }
+
+
+    String replaceAlphabet(String input){
+
+
+        InputStream in = getClass().getResourceAsStream("./alphabet");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        String line;
+
+        try {
+            while ((line = reader.readLine()) != null) {
+                input = input.replace(" "+line+" "," ");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return input;
     }
 
     String replaceArabic(String input){
