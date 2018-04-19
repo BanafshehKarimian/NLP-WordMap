@@ -1,3 +1,5 @@
+import htz.ir.stemming.PersianStemmer;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,10 +34,20 @@ public class filereader {
         output = replaceArabic(output);
         //output = removeExtra(output);
         //output = removeVerbs(output);
-        //output = output.replace("های ","").replace("هایی ","");
+        output = output.replace("های ","").replace("هایی ","");
 
         output = output.replace("ܫܲܫ"," ").replace("ہ", " ").replace("ے"," ").replace("ں","ر").replace("ی","ی");
         output = replaceAlphabet(output);
+        String x= "";
+        PersianStemmer ps = new PersianStemmer();
+        /*
+        for(int i=0;i<output.split(" ").length;i++){
+
+            x+= ps.run(output.split(" ")[i]);
+            x+=" ";
+
+        }
+        */
         return output;//removeVerbs(output);
     }
 
@@ -86,6 +98,7 @@ public class filereader {
         String line;
         try {
             while ((line = reader.readLine()) != null) {
+                //System.out.print(line+"\n");
                 output = output.replace(line," ");
             }
         } catch (IOException e) {
