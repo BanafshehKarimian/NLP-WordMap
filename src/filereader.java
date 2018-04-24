@@ -32,22 +32,22 @@ public class filereader {
         output = input.replace("\u200C"," ").replace("\n"," \n ");
         output = removeSimbols(output);
         output = replaceArabic(output);
-        //output = removeExtra(output);
-        //output = removeVerbs(output);
+        output = removeExtra(output);
+       // output = removeVerbs(output);
         output = output.replace("های ","").replace("هایی ","");
 
         output = output.replace("ܫܲܫ"," ").replace("ہ", " ").replace("ے"," ").replace("ں","ر").replace("ی","ی");
         output = replaceAlphabet(output);
         String x= "";
         PersianStemmer ps = new PersianStemmer();
-        /*
+
         for(int i=0;i<output.split(" ").length;i++){
 
             x+= ps.run(output.split(" ")[i]);
             x+=" ";
 
         }
-        */
+
         return output;//removeVerbs(output);
     }
 
@@ -142,6 +142,7 @@ public class filereader {
             e.printStackTrace();
         }
         //output = output.replace("های "," ").replace("ها"," ").replace("است "," ").replace("آن "," ").replace("گفت "," ").replace("این "," ").replace("یک "," ").replace("در "," ");
+        output = output.replace("است"," ").replace("بود"," ").replace("کردند"," ").replace("کرد"," ").replace("کرد"," ");
         return output;
 
     }

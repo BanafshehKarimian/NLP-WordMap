@@ -154,13 +154,20 @@ public class WordMap {
 
             }
             Integer  max =0;
+            String imp1="";
+            String imp2="";
             for (Map.Entry< String, Integer[] > entry : counterT.entrySet()){
                 String s = entry.getKey();
                 Integer a[] =new Integer[3];
                 a = entry.getValue();
                 a[2]=a[0]-a[1];
-                if(Math.abs(a[2])>max)
+                if(Math.abs(a[2])>max) {
+                    if(a[2]<0)
+                        imp2=s;
+                    else
+                        imp1=s;
                     max = Math.abs(a[2]);
+                }
                 counterT.put(entry.getKey(),a);
                 //System.out.print("word:"+entry.getKey()+"|1:"+a[0]+"|2:"+a[1]+"|diff:"+a[2]+"\n");
                 if(a[2]<0)
@@ -172,12 +179,14 @@ public class WordMap {
                 writer1.newLine();
                 writer4.newLine();
             }
+            System.out.print("most important feature in 1343:"+imp1+"\n");
+            System.out.print("most important feature in 1391:"+imp2+"\n");
             for (Map.Entry< String, Integer[] > entry : counterT.entrySet()){
 
                 String s = entry.getKey();
                 Integer a[] =new Integer[3];
                 a = entry.getValue();
-                for (int i=0;i<max - a[2];i++)
+                for (int i=0;i<max - Math.abs(a[2]);i++)
                     writer2.write(s+" ");
                 writer2.newLine();
 
