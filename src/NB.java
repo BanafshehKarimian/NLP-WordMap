@@ -24,6 +24,13 @@ public class NB {
         float precision2 = (float) 0;
         float recall2 = (float) 0;
         float acc = (float) 0;
+        float truePositive = (float) 0;
+        float positive = (float) 0;
+        float falsePositive = (float) 0;
+        float truePositive2 = (float) 0;
+        float positive2 = (float) 0;
+        float falsePositive2 = (float) 0;
+
         int s = 0;
         if(smooth)
             s=1;
@@ -31,27 +38,36 @@ public class NB {
 
             test.get(i).add(prob(test.get(i),s));
             if(test.get(i).get(test.get(i).size()-2).equals(test.get(i).get(test.get(i).size()-1))) {
-                if (test.get(i).get(test.get(i).size() - 2).equals("1"))
-                    precision1++;
-                else
-                    precision2++;
+                if (test.get(i).get(test.get(i).size() - 2).equals("1")) {
+                    truePositive++;
+                    positive++;
+                }
+                else{
+                    truePositive2++;
+                    positive2++;
+                }
                 acc++;
             }
-
-            if(test.get(i).get(test.get(i).size()-2).equals("1"))
-                recall1++;
-            else
-                recall2++;
+            else {
+                if (test.get(i).get(test.get(i).size() - 2).equals("1")) {
+                    falsePositive++;
+                    positive2++;
+                }
+                else{
+                    positive++;
+                    falsePositive2++;
+                }
+            }
             //System.out.print("line"+i+":"+test.get(i).get(test.get(i).size()-2)+"="+test.get(i).get(test.get(i).size()-1)+"\n");
         }
-        precision1 = precision1/test.size();
-        precision2 = precision2/test.size();
-        recall1 = precision1/recall1;
-        recall2 = precision2/recall2;
+        precision1 =truePositive/(truePositive+falsePositive); //precision1/test.size();
+        precision2 =truePositive2/(truePositive2+falsePositive2); //precision2/test.size();
+        recall1 = truePositive/positive;//precision1/recall1;
+        recall2 = truePositive2/positive2;//precision2/recall2;
         acc=acc/test.size();
         System.out.print("label 1 as Positive: p="+precision1+",R="+recall1+"\n");
         System.out.print("label 2 as Positive: p="+precision2+",R="+recall2+"\n");
-        System.out.print("accuracy:="+acc);
+        System.out.print("accuracy:="+acc+"\n");
     }
     public static String  prob(Vector<String >t,int smooth){
 
